@@ -45,6 +45,7 @@ public class ConnectionTest {
     }
 
     private void useDataSource(DataSource dataSource) throws SQLException {
+        // 사용할 때는 DB 연결정보가 필요 없음
         Connection con1 = dataSource.getConnection();
         Connection con2 = dataSource.getConnection();
         log.info("connection={}, class={}", con1, con1.getClass());
