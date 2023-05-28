@@ -15,6 +15,9 @@ import static hello.jdbc.connection.ConnectionConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+/**
+ * 기본 동작, 트랜잭션이 없어서 문제 발생
+ */
 @Slf4j
 class MemberServiceV1Test {
 

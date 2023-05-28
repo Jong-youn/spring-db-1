@@ -128,7 +128,6 @@ public class MemberRepositoryV2 {
         PreparedStatement pstmt = null;
 
         try {
-            con = getConnection();
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, money);
             pstmt.setString(2, memberId);

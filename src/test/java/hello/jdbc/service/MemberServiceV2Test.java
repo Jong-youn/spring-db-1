@@ -2,6 +2,7 @@ package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepositoryV2;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,10 @@ import static hello.jdbc.connection.ConnectionConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+/**
+ * 트랜잭션 - 커넥션 파라미터 전달 방식 동기화
+ */
+@Slf4j
 class MemberServiceV2Test {
 
     private MemberRepositoryV2 memberRepository;
@@ -43,7 +48,9 @@ class MemberServiceV2Test {
         memberRepository.save(memberB);
 
         // when
+        log.info("START TX");
         memberService.accountTransfer(memberA.getMemberId(), memberB.getMemberId(), 2000);
+        log.info("END TX");
 
         // then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
@@ -62,9 +69,11 @@ class MemberServiceV2Test {
         memberRepository.save(memberEx);
 
         // when
+        log.info("START TX");
         assertThatThrownBy(() ->
                 memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(), 2000))
                 .isInstanceOf(IllegalStateException.class);
+        log.info("END TX");
 
         // then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
