@@ -18,9 +18,12 @@ import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 트랜잭션 - DataSource, transactionManager 자동 등록
+ */
 @Slf4j
 @SpringBootTest
-public class MemberServiceV3_4Test {
+public class  MemberServiceV3_4Test {
 
     public static final String MEMBER_A = "memberA";
     public static final String MEMBER_B = "memberB";

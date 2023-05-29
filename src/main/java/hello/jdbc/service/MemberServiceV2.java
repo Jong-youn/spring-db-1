@@ -19,6 +19,9 @@ public class MemberServiceV2 {
     private final DataSource dataSource;
     private final MemberRepositoryV2 memberRepository;
 
+    /**
+     * 트랜잭션을 사용하기 위해서 JDBC에 의존하고 있다.
+     */
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         Connection con = dataSource.getConnection();
         try {

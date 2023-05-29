@@ -8,6 +8,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.sql.SQLException;
 
+/**
+ * 트랜잭션 - 트랜잭션 템플릿
+ */
 @Slf4j
 public class MemberServiceV3_2 {
 
@@ -20,6 +23,7 @@ public class MemberServiceV3_2 {
     }
 
     public void accountTransfer(String fromId, String toId, int money) {
+        // 이 코드 안에서 트랜잭션 시작
         txTemplate.executeWithoutResult((status) -> {
             try {
                 bizLogic(fromId, toId, money);

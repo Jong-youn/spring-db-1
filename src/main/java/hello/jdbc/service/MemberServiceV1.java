@@ -11,6 +11,9 @@ public class MemberServiceV1 {
 
     private final MemberRepositoryV1 memberRepository;
 
+    /**
+     * 문제: SQLExcption(JDBC)에 의존. memberRepository에서 올라오는 예외이기 때문에 memberRepository에서 해결해야됨.
+     */
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);

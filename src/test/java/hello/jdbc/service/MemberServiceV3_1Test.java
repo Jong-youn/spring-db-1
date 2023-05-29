@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import static hello.jdbc.connection.ConnectionConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 트랜잭션 - 트랜잭션 매니저
+ */
 class MemberServiceV3_1Test {
 
     public static final String MEMBER_A = "memberA";
@@ -27,6 +30,7 @@ class MemberServiceV3_1Test {
     @BeforeEach
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+        // jpa로 변경시 DataSourceTransactionManager에서 jpaTransactionManager로 변경하면 된다.
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
         memberRepository = new MemberRepositoryV3(dataSource);
         memberService = new MemberServiceV3_1(transactionManager, memberRepository);
