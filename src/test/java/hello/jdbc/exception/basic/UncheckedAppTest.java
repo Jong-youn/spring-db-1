@@ -22,7 +22,8 @@ public class UncheckedAppTest {
         Controller controller = new Controller();
         try {
             controller.request();
-        } catch (Exception | RuntimeSQLException e) {
+        } catch (Exception e) {
+            // 록 출력시 마지막 파라미터에 예외(e)를 넣어주면 로그에 스택트레이스를 출력할 수 있다.
             log.info("ex", e);
         }
     }
@@ -30,7 +31,7 @@ public class UncheckedAppTest {
     static class Controller {
         Service service = new Service();
 
-        public void request() throws RuntimeSQLException {
+        public void request() {
             service.logic();
         }
     }
@@ -39,7 +40,7 @@ public class UncheckedAppTest {
         Repository repository = new Repository();
         NetworkClient networkClient = new NetworkClient();
 
-        public void logic() throws RuntimeSQLException {
+        public void logic() {
             repository.call();
             networkClient.call();
         }
@@ -56,6 +57,7 @@ public class UncheckedAppTest {
             try {
                 runSQL();
             } catch (SQLException e) {
+                // 예외를 바꿔서 throw
                 throw new RuntimeSQLException(e);
             }
         }
@@ -71,7 +73,7 @@ public class UncheckedAppTest {
         }
     }
 
-    static class RuntimeSQLException extends Throwable {
+    static class RuntimeSQLException extends RuntimeException {
         public RuntimeSQLException() {
         }
 
