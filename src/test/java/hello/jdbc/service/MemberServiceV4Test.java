@@ -3,6 +3,8 @@ package hello.jdbc.service;
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepository;
 import hello.jdbc.repository.MemberRepositoryV4_1;
+import hello.jdbc.repository.MemberRepositoryV4_2;
+import hello.jdbc.repository.MemberRepositoryV5;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -49,8 +51,10 @@ class MemberServiceV4Test {
         }
 
         @Bean
-        MemberRepositoryV4_1 memberRepository() {
-            return new MemberRepositoryV4_1(dataSource);
+        MemberRepository memberRepository() {
+//            return new MemberRepositoryV4_1(dataSource); // 단순 예외 변환
+//            return new MemberRepositoryV4_2(dataSource); // 스프링 예외 변환
+            return new MemberRepositoryV5(dataSource);
         }
 
         @Bean
@@ -86,6 +90,8 @@ class MemberServiceV4Test {
         assertThat(findMemberB.getMoney()).isEqualTo(12000);
     }
 
+    @Test
+    @DisplayName("이체중 예외 발생")
     void accountTransferEx() {
         // given
         Member memberA = new Member(MEMBER_A, 10000);
