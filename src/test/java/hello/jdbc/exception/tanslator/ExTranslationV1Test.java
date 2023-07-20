@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -90,8 +91,8 @@ public class ExTranslationV1Test {
                 }
                 throw new MyDbException(e);
             } finally {
-                closeStatement(pstmt);
-                closeConnection(con);
+                JdbcUtils.closeStatement(pstmt);
+                JdbcUtils.closeConnection(con);
             }
         }
     }
