@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 /**
  * 트랜잭션 - 트랜잭션 매니저
+ * JDBC 기술과 핵심 비즈니스 로직이 섞여있어 유지보수 하기 어려움
  */
 @Slf4j
 @RequiredArgsConstructor
